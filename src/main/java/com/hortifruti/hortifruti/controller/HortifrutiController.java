@@ -1,4 +1,4 @@
-package com.hortifruti.hortifruti.controller;
+/* package com.hortifruti.hortifruti.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -54,4 +54,4 @@ public class hortifrutiController {
 }
 
 
-
+*/
