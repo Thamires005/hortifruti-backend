@@ -1,58 +1,39 @@
-package br.unip.ads.pim.meuhortifruti.entity;
+package br.unip.ads.pim.meuhortifruti.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-@Entity
-@Table(name = "fornecedor")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Fornecedor implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_fornecedor")
-    private Integer idFornecedor;
+public class FornecedorRequestDTO {
 
     @NotBlank(message = "Nome do fornecedor é obrigatório")
-    @Column(name = "nome", nullable = false, length = 200)
+    @Size(min = 3, max = 200, message = "Nome deve ter entre 3 e 200 caracteres")
     private String nome;
 
     @NotBlank(message = "CNPJ é obrigatório")
     @Pattern(regexp = "\\d{14}", message = "CNPJ deve conter 14 dígitos")
-    @Column(name = "cnpj", nullable = false, unique = true, length = 14)
     private String cnpj;
 
     @NotBlank(message = "Telefone é obrigatório")
     @Pattern(regexp = "\\d{10,11}", message = "Telefone deve conter 10 ou 11 dígitos")
-    @Column(name = "telefone", nullable = false, length = 11)
     private String telefone;
 
     @NotBlank(message = "Email é obrigatório")
     @Email(message = "Email deve ser válido")
-    @Column(name = "email", nullable = false, length = 200)
     private String email;
 
     @NotBlank(message = "Endereço é obrigatório")
-    @Column(name = "endereco", nullable = false, length = 500)
+    @Size(max = 500, message = "Endereço deve ter no máximo 500 caracteres")
     private String endereco;
 
-    @Column(name = "prod_fornecidos", columnDefinition = "TEXT")
     private String prodFornecidos;
-
-    @Builder.Default
-    @OneToMany(mappedBy = "fornecedor", cascade = CascadeType.ALL)
-    private List<Fornece> fornecimentos = new ArrayList<>();
 }

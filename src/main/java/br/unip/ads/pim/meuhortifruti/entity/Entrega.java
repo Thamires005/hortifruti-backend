@@ -3,6 +3,7 @@ package br.unip.ads.pim.meuhortifruti.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "entrega")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Entrega implements Serializable {

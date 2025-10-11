@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario implements Serializable {

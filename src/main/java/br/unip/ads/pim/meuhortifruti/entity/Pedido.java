@@ -3,6 +3,7 @@ package br.unip.ads.pim.meuhortifruti.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "pedido")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pedido implements Serializable {
@@ -30,6 +32,7 @@ public class Pedido implements Serializable {
     @Column(name = "status_pedido", nullable = false, length = 50)
     private String statusPedido;
 
+    @Builder.Default
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itens = new ArrayList<>();
 
