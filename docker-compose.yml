@@ -1,0 +1,135 @@
+services:
+  
+  # Banco de Dados PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    container_name: hortifruti-postgres
+    environment:
+      POSTGRES_DB: hortifruti_db
+      POSTGRES_USER: hortifruti_user
+      POSTGRES_PASSWORD: hortifruti_pass
+      POSTGRES_ENCODING: UTF8
+      POSTGRES_LOCALE: pt_BR.UTF-8
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - hortifruti-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hortifruti_user -d hortifruti_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Banco de dados dedicado para Keycloak
+  postgres-keycloak:
+    image: postgres:16-alpine
+    container_name: hortifruti-postgres-keycloak
+    environment:
+      POSTGRES_DB: keycloak_db
+      POSTGRES_USER: keycloak_user
+      POSTGRES_PASSWORD: keycloak_pass
+      POSTGRES_ENCODING: UTF8
+    volumes:
+      - postgres_keycloak_data:/var/lib/postgresql/data
+    networks:
+      - hortifruti-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak_user -d keycloak_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Servidor Keycloak para autenticação
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0
+    container_name: hortifruti-keycloak
+    command: start-dev
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres-keycloak:5432/keycloak_db
+      KC_DB_USERNAME: keycloak_user
+      KC_DB_PASSWORD: keycloak_pass
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8180
+      KC_HOSTNAME_STRICT: false
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_LOG_LEVEL: info
+      KC_METRICS_ENABLED: true
+      KC_HEALTH_ENABLED: true
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8180:8080"
+    depends_on:
+      postgres-keycloak:
+        condition: service_healthy
+    networks:
+      - hortifruti-network
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/8080;echo -e 'GET /health/ready HTTP/1.1\r\nhost: http://localhost\r\nConnection: close\r\n\r\n' >&3;if [ $? -eq 0 ]; then echo 'Healthcheck Successful';exit 0;else echo 'Healthcheck Failed';exit 1;fi;"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped
+
+  # Backend Spring Boot
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hortifruti-backend
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: hortifruti_db
+      DB_USER: hortifruti_user
+      DB_PASSWORD: hortifruti_pass
+      KEYCLOAK_ISSUER_URI: http://keycloak:8080/realms/hortifruti-realm
+      KEYCLOAK_JWK_SET_URI: http://keycloak:8080/realms/hortifruti-realm/protocol/openid-connect/certs
+      KEYCLOAK_REALM: hortifruti-realm
+      KEYCLOAK_CLIENT_ID: hortifruti-backend
+      KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET}
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+    networks:
+      - hortifruti-network
+    restart: unless-stopped
+
+  # PgAdmin para gerenciamento do banco de dados (opcional - desenvolvimento)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: hortifruti-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@hortifruti.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - hortifruti-network
+    restart: unless-stopped
+
+networks:
+  hortifruti-network:
+    driver: bridge
+    name: hortifruti-network
+
+volumes:
+  postgres_data:
+    name: hortifruti-postgres-data
+  postgres_keycloak_data:
+    name: hortifruti-postgres-keycloak-data
