@@ -3,6 +3,7 @@ package br.unip.ads.pim.meuhortifruti.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "produto")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Produto implements Serializable {
@@ -49,12 +51,15 @@ public class Produto implements Serializable {
     @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
     private Estoque estoque;
 
+    @Builder.Default
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<Fornece> fornecimentos = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "produto")
     private List<ItemPedido> itensPedido = new ArrayList<>();
 
+    @Builder.Default
     @ManyToMany(mappedBy = "produtos")
     private List<Carrinho> carrinhos = new ArrayList<>();
 }

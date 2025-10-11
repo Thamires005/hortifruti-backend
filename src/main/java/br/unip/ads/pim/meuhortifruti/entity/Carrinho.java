@@ -5,6 +5,7 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "carrinho")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Carrinho implements Serializable {
@@ -42,11 +44,12 @@ public class Carrinho implements Serializable {
     @Column(name = "valor_total", nullable = false, precision = 10, scale = 2)
     private BigDecimal valorTotal;
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(
-        name = "carrinho_produto",
-        joinColumns = @JoinColumn(name = "id_carrinho"),
-        inverseJoinColumns = @JoinColumn(name = "id_produto")
+            name = "carrinho_produto",
+            joinColumns = @JoinColumn(name = "id_carrinho"),
+            inverseJoinColumns = @JoinColumn(name = "id_produto")
     )
     private List<Produto> produtos = new ArrayList<>();
 }
