@@ -28,5 +28,4 @@ public class ProdutoRequestDTO{
     @NotNull(message = "A quantidade do produto é obrigatória")
     @Min(value = 0, message = "A quantidade não pode ser negativa")
     private Integer quantEstoque;
-
 }

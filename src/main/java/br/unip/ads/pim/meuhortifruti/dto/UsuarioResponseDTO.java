@@ -1,0 +1,16 @@
+package br.unip.ads.pim.meuhortifruti.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UsuarioResponseDTO {
+    
+    private Integer idUsuario;
+    private String tipoUsuario;
+}

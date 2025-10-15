@@ -1,6 +1,6 @@
 package br.unip.ads.pim.meuhortifruti.dto;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,11 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProdutoResponseDTO {
+public class EntregaResponseDTO {
     
-    private Integer idProduto;
-    private String nome;
-    private BigDecimal preco;
-    private Integer quantEstoque;
-    private Integer idCategoria;
+    private Integer idEntrega;
+    private String endereco;
+    private String statusEntrega;
+    private LocalDateTime dtEntrega;
 }

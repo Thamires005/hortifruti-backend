@@ -1,7 +1,5 @@
 package br.unip.ads.pim.meuhortifruti.dto;
 
-import java.math.BigDecimal;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,11 +9,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProdutoResponseDTO {
+public class FornecedorResponseDTO {
     
-    private Integer idProduto;
+    private Integer idFornecedor; 
     private String nome;
-    private BigDecimal preco;
-    private Integer quantEstoque;
-    private Integer idCategoria;
+    private String cnpj; 
+    private String telefone;
+    private String email;
+    private String endereco;
 }
