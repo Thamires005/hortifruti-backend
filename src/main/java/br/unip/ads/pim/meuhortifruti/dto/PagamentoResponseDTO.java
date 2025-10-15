@@ -11,11 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProdutoResponseDTO {
+public class PagamentoResponseDTO {
     
-    private Integer idProduto;
-    private String nome;
-    private BigDecimal preco;
-    private Integer quantEstoque;
-    private Integer idCategoria;
+    private Integer idPagamento;
+    private BigDecimal valor;
+    private String formaPagamento;
+    private String statusPagamento;
 }
