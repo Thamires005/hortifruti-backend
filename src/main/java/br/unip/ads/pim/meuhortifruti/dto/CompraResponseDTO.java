@@ -2,7 +2,6 @@ package br.unip.ads.pim.meuhortifruti.dto;
 
 import java.util.List;
 
-import br.unip.ads.pim.meuhortifruti.entity.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,12 +11,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PedidoResponseDTO {
+public class CompraResponseDTO {
      
-    private Integer idPedido;
-    private Cliente cliente;
-    private String StatusPedido;
-    private List<ItemPedidoRequestDTO> itensPedidos;
+    private Integer idCompra;
+    private String statusCompra;
+    private List<ItemCompraRequestDTO> itensCompra;
     private PagamentoResponseDTO pagamento;
-    private EntregaResponseDTO entrega;
+    
 }

@@ -34,11 +34,4 @@ public class Usuario implements Serializable{
     @NotBlank(message = "Senha é obrigatória")
     @Size(min = 5)
     private String senha;
-
-    @NotBlank(message ="Tipo do Usuário obrigatório")
-    private String tipoUsuario;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_cliente", nullable = false)
-    private Cliente cliente;
 }
