@@ -71,9 +71,5 @@ public class Produto implements Serializable {
 
     @Builder.Default
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
-    private List<ItemPedido> itensPedido = new ArrayList<>();
-    
-    @Builder.Default
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
-    private List<Carrinho> carrinhos = new ArrayList<>();
+    private List<ItemCompra> itenscompra = new ArrayList<>();
 }

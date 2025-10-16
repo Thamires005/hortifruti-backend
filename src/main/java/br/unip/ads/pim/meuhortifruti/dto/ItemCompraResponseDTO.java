@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemPedidoResponseDTO {
+public class ItemCompraResponseDTO {
     
-     private Integer idItemPedido;
+     private Integer idItemCompra;
      private Produto produto;
      private BigDecimal preco;
      private Integer quantidade;

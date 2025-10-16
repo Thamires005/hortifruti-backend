@@ -34,8 +34,8 @@ public class Pagamento implements Serializable  {
     private Integer idPagamento;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_pedido", nullable = false)
-    private Pedido pedido;
+    @JoinColumn(name = "id_compra", nullable = false)
+    private Compra compra;
 
     @NotNull(message = "O valor é obrigatório")
     @DecimalMin(value = "0.01", message = "O valor deve ser maior que zero")
