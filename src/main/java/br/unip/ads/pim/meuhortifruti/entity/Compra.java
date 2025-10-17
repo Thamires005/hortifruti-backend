@@ -12,7 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -23,35 +22,27 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "pedido")
+@Table(name = "compra")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pedido implements Serializable {
+public class Compra implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_pedido")
-    private Integer idPedido;
+    @Column(name = "id_compra")
+    private Integer idCompra;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_cliente", nullable = false)
-    private Cliente cliente;
-
-    @NotBlank(message = "Status do pedido é obrigatório")
-    @Column(name = "status_pedido", nullable = false, length = 100)
-    private String StatusPedido;
+    @NotBlank(message = "Status da compra é obrigatório")
+    @Column(name = "status_compra", nullable = false, length = 100)
+    private String statusCompra;
 
     @Builder.Default
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
-    private List<ItemPedido> itensPedidos = new ArrayList<>();
+    @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL)
+    private List<ItemCompra> itensPedidos = new ArrayList<>();
 
-    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "compra", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pagamento", nullable = false)
     private Pagamento pagamento;
-
-    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_entrega", nullable = false)
-    private Entrega entrega;
 }

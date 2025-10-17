@@ -12,5 +12,4 @@ import lombok.NoArgsConstructor;
 public class UsuarioResponseDTO {
     
     private Integer idUsuario;
-    private String tipoUsuario;
 }
