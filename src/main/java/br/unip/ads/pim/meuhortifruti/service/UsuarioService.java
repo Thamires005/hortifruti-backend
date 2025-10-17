@@ -6,7 +6,8 @@ import br.unip.ads.pim.meuhortifruti.entity.Usuario;
 import br.unip.ads.pim.meuhortifruti.exception.RecursoDuplicadoException;
 import br.unip.ads.pim.meuhortifruti.exception.RecursoNaoEncontradoException;
 import br.unip.ads.pim.meuhortifruti.repository.UsuarioRepository;
-import org.springframework.stereotype.Usuario;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -14,7 +15,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstrutor
-
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
@@ -48,7 +48,7 @@ public class UsuarioService {
     public UsuarioResponseDTO atualizar(Integer id, UsuarioRequestDTO dto ){
         Usuario usuario = buscarUsuarioPorId(id);
 
-        usuarioRepository.findByNome(dto.getNome()).ifPresent( Usuario usuarioExistente -> {
+        usuarioRepository.findByNome(dto.getNome()).ifPresent(usuarioExistente -> {
                 if (!usuarioExistente.getIdUsuario().equals(id)){
                 throw new RecursoDuplicadoException("Usuário ", "nome ", dto.getNome());
                 }

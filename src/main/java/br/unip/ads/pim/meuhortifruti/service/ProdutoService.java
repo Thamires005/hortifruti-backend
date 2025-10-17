@@ -6,6 +6,7 @@ import br.unip.ads.pim.meuhortifruti.entity.Produto;
 import br.unip.ads.pim.meuhortifruti.exception.RecursoDuplicadoException;
 import br.unip.ads.pim.meuhortifruti.exception.RecursoNaoEncontradoException;
 import br.unip.ads.pim.meuhortifruti.repository.ProdutoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,7 +48,7 @@ public class ProdutoService {
     public ProdutoResponseDTO atualizar(Integer id, ProdutoRequestDTO dto) {
         Produto produto = buscarProdutoPorId(id);
 
-        produtoRepository.findByNome(dto.getNome()).ifPresent(Produto produtoExistente -> {
+        produtoRepository.findByNome(dto.getNome()).ifPresent(produtoExistente -> {
             if (!produtoExistente.getIdProduto().equals(id)) {
                 throw new RecursoDuplicadoException("Produto ", "nome ", dto.getNome());
             }

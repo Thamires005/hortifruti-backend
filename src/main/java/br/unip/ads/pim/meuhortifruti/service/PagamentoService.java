@@ -6,6 +6,9 @@ import br.unip.ads.pim.meuhortifruti.entity.Pagamento;
 import br.unip.ads.pim.meuhortifruti.exception.RecursoDuplicadoException;
 import br.unip.ads.pim.meuhortifruti.exception.RecursoNaoEncontradoException;
 import br.unip.ads.pim.meuhortifruti.repository.PagamentoRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +16,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstrutor
 public class PagamentoService {
-
     private final PagamentoRepository pagamentoRepository;
 
     @Transactional(readOnly = true)
@@ -48,7 +50,7 @@ public class PagamentoService {
     public PagamentoResponseDTO atualizar(Integer id, PagamentoRequestDTO dto) {
         Pagamento pagamento = buscarPagamentoPorId(id);
 
-        pagamentoRepository.findByNome(dto.getNome()).ifPresent(Pagamento pagamentoExistente ->{
+        pagamentoRepository.findByNome(dto.getNome()).ifPresent(pagamentoExistente ->{
             if (!categoriaExistente.getIdCategoria().equals(id)) {
                 throw new RecursoDuplicadoException("Categoria", "nome", dto.getNome());
             }
@@ -73,7 +75,7 @@ public class PagamentoService {
     private PagamentoResponseDTO converterParaDTO (Pagamento pagamento){
         return PagamentoResponseDTO.builder()
                 .IdPagamento(pagamento.getIdProduto())
-                .nome(pagamento getNome())
+                .nome(pagamento.getNome())
                 .build();
     }
 }
