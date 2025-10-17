@@ -27,6 +27,7 @@ public class Categoria implements Serializable {
     @NotBlank(message = "Nome da categoria é obrigatório")
     @Column(name = "nome", nullable = false, unique = true, length = 100)
     private String nome;
+    hdjfhd
 //
 //    @Builder.Default
 //    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
