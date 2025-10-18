@@ -6,6 +6,7 @@ import br.unip.ads.pim.meuhortifruti.entity.Produto;
 import br.unip.ads.pim.meuhortifruti.exception.RecursoDuplicadoException;
 import br.unip.ads.pim.meuhortifruti.exception.RecursoNaoEncontradoException;
 import br.unip.ads.pim.meuhortifruti.repository.ProdutoRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstrutor
+@RequiredArgsConstructor
 
 public class ProdutoService {
     private final ProdutoRepository produtoRepository;
@@ -32,7 +33,7 @@ public class ProdutoService {
         return converterParaDTO(produto);
     }
     @Transactional
-    public ProdutoResponseDTO criar(ProdutoResponseDTO dto) {
+    public ProdutoResponseDTO criar(@Valid ProdutoRequestDTO dto) {
         if(produtoRepository.existsByNome(dto.getNome())){
             throw new RecursoDuplicadoException("Produto ", "nome ", dto.getNome());
         }
@@ -41,7 +42,7 @@ public class ProdutoService {
                 .build();
 
         produto = produtoRepository.save(produto);
-        return ConverterParaDTO(produto);
+        return converterParaDTO(produto);
     }
 
     @Transactional
@@ -54,7 +55,7 @@ public class ProdutoService {
             }
         });
 
-        produto.setNome(getNome());
+        produto.setNome(dto.getNome());
         produto = produtoRepository.save(produto);
         return converterParaDTO(produto);
     }

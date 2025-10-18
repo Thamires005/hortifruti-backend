@@ -14,12 +14,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstrutor
+@RequiredArgsConstructor
+
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
     @Transactional(readOnly = true)
-    public List<UsuarioResponseDTO> listarTodos(){
+    public List<UsuarioResponseDTO> listarTodas(){
         return usuarioRepository.findAll()
                 .stream()
                 .map(this::converterParaDTO)
@@ -66,13 +67,12 @@ public class UsuarioService {
     }
 
     private Usuario buscarUsuarioPorId(Integer id){
-        return usuarioRepository.findId(id)
+        return usuarioRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário ", "id ", id));
     }
     private UsuarioResponseDTO converterParaDTO (Usuario usuario){
         return UsuarioResponseDTO.builder()
-                .IdUsuario(usuario.getIdUsuario())
-                .nome(Usuario.getNome())
-                .builder();
+                .idUsuario(usuario.getIdUsuario())
+                .build();
     }
 }

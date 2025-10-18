@@ -2,7 +2,7 @@ package br.unip.ads.pim.meuhortifruti.controller;
 
 import br.unip.ads.pim.meuhortifruti.dto.PagamentoRequestDTO;
 import br.unip.ads.pim.meuhortifruti.dto.PagamentoResponseDTO;
-import br.unip.ads.pim.meuhortifruti.dto.PagamentoService;
+import br.unip.ads.pim.meuhortifruti.service.PagamentoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ public class PagamentoController {
 
     @GetMapping
     public ResponseEntity<List<PagamentoResponseDTO>> listarTodos() {
-        List<PagamentoResponseDTO> pagamentos = pagamentoService.listarTodos();
+        List<PagamentoResponseDTO> pagamentos = pagamentoService.listarTodas();
         return ResponseEntity.ok(pagamentos);
     }
 

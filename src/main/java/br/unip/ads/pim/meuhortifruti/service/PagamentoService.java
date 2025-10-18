@@ -1,5 +1,6 @@
 package br.unip.ads.pim.meuhortifruti.service;
 
+
 import br.unip.ads.pim.meuhortifruti.dto.PagamentoRequestDTO;
 import br.unip.ads.pim.meuhortifruti.dto.PagamentoResponseDTO;
 import br.unip.ads.pim.meuhortifruti.entity.Pagamento;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstrutor
+@RequiredArgsConstructor
 public class PagamentoService {
     private final PagamentoRepository pagamentoRepository;
 
@@ -51,14 +52,14 @@ public class PagamentoService {
         Pagamento pagamento = buscarPagamentoPorId(id);
 
         pagamentoRepository.findByNome(dto.getNome()).ifPresent(pagamentoExistente ->{
-            if (!categoriaExistente.getIdCategoria().equals(id)) {
+            if (!pagamentoExistente.getIdPagamento().equals(id)) {
                 throw new RecursoDuplicadoException("Categoria", "nome", dto.getNome());
             }
         });
 
         pagamento.setNome(dto.getNome());
         pagamento = pagamentoRepository.save(pagamento);
-        return ConverterParaDto(pagamento);
+        return converterParaDTO(pagamento);
     }
 
     @Transactional
@@ -74,7 +75,7 @@ public class PagamentoService {
 
     private PagamentoResponseDTO converterParaDTO (Pagamento pagamento){
         return PagamentoResponseDTO.builder()
-                .IdPagamento(pagamento.getIdProduto())
+                .idPagamento(pagamento.getIdPagamento())
                 .nome(pagamento.getNome())
                 .build();
     }

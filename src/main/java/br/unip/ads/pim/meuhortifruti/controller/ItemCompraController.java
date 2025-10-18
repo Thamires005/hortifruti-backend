@@ -2,7 +2,6 @@ package br.unip.ads.pim.meuhortifruti.controller;
 
 import br.unip.ads.pim.meuhortifruti.dto.ItemCompraRequestDTO;
 import br.unip.ads.pim.meuhortifruti.dto.ItemCompraResponseDTO;
-import br.unip.ads.pim.meuhortifruti.entity.ItemCompra;
 import br.unip.ads.pim.meuhortifruti.service.ItemCompraService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +19,5 @@ public class ItemCompraController {
 
     private final ItemCompraService ItemCompraService;
 
-    
-
-    
 
 }

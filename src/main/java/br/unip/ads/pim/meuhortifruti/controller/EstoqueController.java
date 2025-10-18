@@ -1,6 +1,7 @@
+
 package br.unip.ads.pim.meuhortifruti.controller;
 
-import br.unip.ads.pim.meuhortifruti.dto.EstoqueRequestDTO;
+import br.unip.ads.pim.meuhortifruti.dto.EstoqueResquestDTO;
 import br.unip.ads.pim.meuhortifruti.dto.EstoqueResponseDTO;
 import br.unip.ads.pim.meuhortifruti.service.EstoqueService;
 import jakarta.validation.Valid;
@@ -13,15 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/estoques")
+@RequestMapping("/v1/estoque")
 @RequiredArgsConstructor
-public class EstoqueController {
+public class  EstoqueController {
 
     private final EstoqueService estoqueService;
 
     @GetMapping
     public ResponseEntity<List<EstoqueResponseDTO>> listarTodos() {
-        List<EstoqueResponseDTO> estoques = estoqueService.listarTodos();
+        List<EstoqueResponseDTO> estoques = estoqueService.listarTodas();
         return ResponseEntity.ok(estoques);
     }
 
@@ -42,7 +43,7 @@ public class EstoqueController {
     @Secured("ROLE_ADMIN")
     public ResponseEntity<EstoqueResponseDTO> atualizar(
             @PathVariable Integer id,
-            @Valid @RequestBody EstoqueRequestDTO dto) {
+            @Valid @RequestBody EstoqueResquestDTO dto) {
         EstoqueResponseDTO estoque = estoqueService.atualizar(id, dto);
         return ResponseEntity.ok(estoque);
     }

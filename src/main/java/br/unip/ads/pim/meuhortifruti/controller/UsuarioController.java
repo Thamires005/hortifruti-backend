@@ -1,7 +1,7 @@
 package br.unip.ads.pim.meuhortifruti.controller;
 
-import br.unip.ads.pim.meuhortifruti.service.UsuarioResquestDTO;
-import br.unip.ads.pim.meuhortifruti.service.UsuarioResponseDTO;
+import br.unip.ads.pim.meuhortifruti.dto.UsuarioRequestDTO;
+import br.unip.ads.pim.meuhortifruti.dto.UsuarioResponseDTO;
 import br.unip.ads.pim.meuhortifruti.service.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +20,8 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @GetMapping
-    public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {
-        List<UsuarioResponseDTO> usuarios = usuarioService.listarTodos();
+    public ResponseEntity<List<UsuarioResponseDTO>> listarTodas() {
+        List<UsuarioResponseDTO> usuarios = usuarioService.listarTodas();
         return ResponseEntity.ok(usuarios);
     }
 
@@ -33,7 +33,7 @@ public class UsuarioController {
 
     @PostMapping
     @Secured("ROLE_ADMIN")
-    public ResponseEntity<UsuarioResponseDTO> criar(@Valid @RequestBody UsuarioResquestDTO dto) {
+    public ResponseEntity<UsuarioResponseDTO> criar(@Valid @RequestBody UsuarioRequestDTO  dto) {
         UsuarioResponseDTO usuario = usuarioService.criar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
     }
@@ -42,7 +42,7 @@ public class UsuarioController {
     @Secured("ROLE_ADMIN")
     public ResponseEntity<UsuarioResponseDTO> atualizar(
             @PathVariable Integer id,
-            @Valid @RequestBody UsuarioResquestDTO dto) {
+            @Valid @RequestBody UsuarioRequestDTO  dto) {
         UsuarioResponseDTO usuario = usuarioService.atualizar(id, dto);
         return ResponseEntity.ok(usuario);
     }

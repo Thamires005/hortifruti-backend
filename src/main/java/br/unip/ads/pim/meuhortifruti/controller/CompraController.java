@@ -1,3 +1,4 @@
+
 package br.unip.ads.pim.meuhortifruti.controller;
 
 import br.unip.ads.pim.meuhortifruti.dto.CompraRequestDTO;
@@ -17,6 +18,5 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CompraController{
 
-    private final CompraService compraService;
 
 }
