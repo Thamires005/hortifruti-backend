@@ -18,5 +18,36 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CompraController{
 
+    Private final CompraService compraService;
 
+    @GetMapping
+    public ResponseEntity<List<CompraResponseDTO>> listarTodas(){
+        List<CompraResponseDTO> compra = compraService.listarTodas();
+        return ResponseEntity.ok(compra);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<CompraResponseDTO> buscarPorId(@PathVariable Integer id){
+        CompraResponseDTO compra = compraService.buscarPorId(id);
+        return ResponseEntity.ok(compra);
+    }
+    @PostMapping
+    @Secured("ROLE_USER")
+    public ResponseEntity<CompraResponseDTO> criar(@Valid @RequestBody CompraRequestDTO dto){
+        CompraResponseDTO compra = compraService.criar(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(compra);
+    }
+    @PutMapping("/{id}")
+    @Secured("ROLE_USER")
+    public ResponseEntity<CompraResponseDTO> atualizar(
+            @PathVariable Integer id,
+            @Valid @RequestBody CompraRequestDTO dto){
+        CompraResponseDTO compra = compraService.atualizar(id, dto);
+        return ResponseEntity.ok(compra);
+    }
+    @DeleteMapping("/{id}")
+    @Secured("ROLE_USER")
+    public ResponseEntity<Void> excluir(@PathVariable Integer id){
+        compraService.excluir(id);
+        return ResponseEntity.noContent().build();
+    }
 }

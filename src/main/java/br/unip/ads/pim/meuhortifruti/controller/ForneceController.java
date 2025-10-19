@@ -21,8 +21,8 @@ public class ForneceController {
     private final ForneceService forneceService;
 
     @GetMapping
-    public ResponseEntity<List<ForneceResponseDTO>> listarTodos() {
-        List<ForneceResponseDTO> forneces = forneceService.listarTodos();
+    public ResponseEntity<List<ForneceResponseDTO>> listarTodas() {
+        List<ForneceResponseDTO> forneces = forneceService.listarTodas();
         return ResponseEntity.ok(forneces);
     }
     @GetMapping("/{id}")

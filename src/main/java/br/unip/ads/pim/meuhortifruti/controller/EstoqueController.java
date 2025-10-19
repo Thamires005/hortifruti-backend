@@ -21,7 +21,7 @@ public class  EstoqueController {
     private final EstoqueService estoqueService;
 
     @GetMapping
-    public ResponseEntity<List<EstoqueResponseDTO>> listarTodos() {
+    public ResponseEntity<List<EstoqueResponseDTO>> listarTodas() {
         List<EstoqueResponseDTO> estoques = estoqueService.listarTodas();
         return ResponseEntity.ok(estoques);
     }
@@ -34,7 +34,7 @@ public class  EstoqueController {
 
     @PostMapping
     @Secured("ROLE_ADMIN")
-    public ResponseEntity<EstoqueResponseDTO> criar(@Valid @RequestBody EstoqueRequestDTO dto) {
+    public ResponseEntity<EstoqueResponseDTO> criar(@Valid @RequestBody EstoqueResquestDTO dto) {
         EstoqueResponseDTO estoque = estoqueService.criar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(estoque);
     }
