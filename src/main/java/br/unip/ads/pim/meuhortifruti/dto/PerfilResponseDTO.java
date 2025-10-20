@@ -5,14 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EstoqueResponseDTO {
+public class PerfilResponseDTO {
     
-    private Integer idEstoque;
-    private ProdutoResponseDTO produto;
-    private Integer quantProdutos;
+    private Integer idPerfil;
+    private String nome;
 }

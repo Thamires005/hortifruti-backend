@@ -15,7 +15,7 @@ public class CompraResponseDTO {
      
     private Integer idCompra;
     private String statusCompra;
-    private List<ItemCompraRequestDTO> itensCompra;
+    private List<ItemCompraResponseDTO> itensCompra;
     private PagamentoResponseDTO pagamento;
     
 }

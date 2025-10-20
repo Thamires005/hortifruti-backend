@@ -31,4 +31,7 @@ public class FornecedorRequestDTO {
 
     @NotBlank(message = "Endereço é obrigatório")
     private String endereco;
+
+    @NotBlank(message = "Produtos fornecidos é obrigatório")
+    private String prodFornecidos;
 }

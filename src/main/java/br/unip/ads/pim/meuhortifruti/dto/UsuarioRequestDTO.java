@@ -17,6 +17,6 @@ public class UsuarioRequestDTO {
     @Size(min = 5)
     private String senha;
 
-    @NotBlank(message ="Tipo do Usuário obrigatório")
-    private String tipoUsuario;
+    @NotBlank(message = "O nome do usuário é obrigatório")
+    private String nome;
 }

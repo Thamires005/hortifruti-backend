@@ -40,7 +40,7 @@ public class Compra implements Serializable {
 
     @Builder.Default
     @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL)
-    private List<ItemCompra> itensPedidos = new ArrayList<>();
+    private List<ItemCompra> itensCompra = new ArrayList<>();
 
     @OneToOne(mappedBy = "compra", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pagamento", nullable = false)

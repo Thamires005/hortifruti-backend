@@ -1,7 +1,7 @@
 package br.unip.ads.pim.meuhortifruti.controller;
 
-import br.unip.ads.pim.meuhortifruti.dto.ItemPedidoRequestDTO;
-import br.unip.ads.pim.meuhortifruti.dto.ItemPedidoResponseDTO;
+import br.unip.ads.pim.meuhortifruti.dto.ItemCompraRequestDTO;
+import br.unip.ads.pim.meuhortifruti.dto.ItemCompraResponseDTO;
 import br.unip.ads.pim.meuhortifruti.service.ItemPedidoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,30 +20,30 @@ public class ItemPedidoController {
     private final ItemPedidoService itemPedidoService;
 
     @GetMapping
-    public ResponseEntity<List<ItemPedidoResponseDTO>> listarTodos() {
-        List<ItemPedidoResponseDTO> itensPedido = itemPedidoService.listarTodos();
+    public ResponseEntity<List<ItemCompraResponseDTO>> listarTodos() {
+        List<ItemCompraResponseDTO> itensPedido = itemPedidoService.listarTodos();
         return ResponseEntity.ok(itensPedido);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ItemPedidoResponseDTO> buscarPorId(@PathVariable Integer id) {
-        ItemPedidoResponseDTO itemPedido = itemPedidoService.buscarPorId(id);
+    public ResponseEntity<ItemCompraResponseDTO> buscarPorId(@PathVariable Integer id) {
+        ItemCompraResponseDTO itemPedido = itemPedidoService.buscarPorId(id);
         return ResponseEntity.ok(itemPedido);
     }
 
     @PostMapping
     @Secured("ROLE_USER")
-    public ResponseEntity<ItemPedidoResponseDTO> criar(@Valid @RequestBody ItemPedidoRequestDTO dto) {
-        ItemPedidoResponseDTO itemPedido = itemPedidoService.criar(dto);
+    public ResponseEntity<ItemCompraResponseDTO> criar(@Valid @RequestBody ItemCompraRequestDTO dto) {
+        ItemCompraResponseDTO itemPedido = itemPedidoService.criar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(itemPedido);
     }
 
     @PutMapping("/{id}")
     @Secured("ROLE_USER")
-    public ResponseEntity<ItemPedidoResponseDTO> atualizar(
+    public ResponseEntity<ItemCompraResponseDTO> atualizar(
             @PathVariable Integer id,
-            @Valid @RequestBody ItemPedidoRequestDTO dto) {
-        ItemPedidoResponseDTO itemPedido = itemPedidoService.atualizar(id, dto);
+            @Valid @RequestBody ItemCompraRequestDTO dto) {
+        ItemCompraResponseDTO itemPedido = itemPedidoService.atualizar(id, dto);
         return ResponseEntity.ok(itemPedido);
     }
 

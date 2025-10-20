@@ -17,4 +17,5 @@ public class PagamentoResponseDTO {
     private BigDecimal valor;
     private String formaPagamento;
     private String statusPagamento;
+    private CompraResponseDTO compra;
 }

@@ -17,4 +17,5 @@ public class FornecedorResponseDTO {
     private String telefone;
     private String email;
     private String endereco;
+    private String prodFornecidos;
 }

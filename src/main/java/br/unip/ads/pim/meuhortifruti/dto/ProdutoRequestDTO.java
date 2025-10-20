@@ -1,9 +1,9 @@
 package br.unip.ads.pim.meuhortifruti.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +24,9 @@ public class ProdutoRequestDTO{
     @NotNull(message = "O preço do produto é obrigatório")
     @DecimalMin(value = "0.01", message = "O preço do produto deve ser maior que zero")
     private BigDecimal preco;
+
+    @Future(message = "Data de validade deverá ser futura")
+    private LocalDate dtvalidade;
 
     @NotNull(message = "A quantidade do produto é obrigatória")
     @Min(value = 0, message = "A quantidade não pode ser negativa")

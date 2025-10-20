@@ -56,7 +56,7 @@ public class Fornecedor implements Serializable {
     @Column(name = "endereco", nullable = false, length = 300)
     private String endereco;
 
-    @NotBlank
+    @NotBlank(message = "Produtos fornecidos é obrigatório")
     @Column(name = "prod_fornecidos", columnDefinition = "TEXT")
     private String prodFornecidos;
 

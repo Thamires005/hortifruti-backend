@@ -1,7 +1,6 @@
 package br.unip.ads.pim.meuhortifruti.dto;
 
 
-import br.unip.ads.pim.meuhortifruti.entity.Produto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -16,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class EstoqueResquestDTO {
     
     @NotNull
-    private Produto produto;
+    private Integer idproduto;
 
     @NotNull(message = "A quantidade de produtos no estoque é obrigatória")
     @Min(value = 0, message = "A quantidade não pode ser negativa")
