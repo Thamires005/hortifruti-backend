@@ -19,6 +19,10 @@ public class UsuarioController {
     
     private final UsuarioService usuarioService;
 
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDTO>> listarTodas() {
         List<UsuarioResponseDTO> usuarios = usuarioService.listarTodas();

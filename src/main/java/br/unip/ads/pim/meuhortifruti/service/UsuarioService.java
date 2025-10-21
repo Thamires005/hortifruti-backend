@@ -19,6 +19,10 @@ import java.util.stream.Collectors;
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
+    public UsuarioService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
+
     @Transactional(readOnly = true)
     public List<UsuarioResponseDTO> listarTodas(){
         return usuarioRepository.findAll()
@@ -50,7 +54,7 @@ public class UsuarioService {
         Usuario usuario = buscarUsuarioPorId(id);
 
         usuarioRepository.findByNome(dto.getNome()).ifPresent(usuarioExistente -> {
-                if (!usuarioExistente.getIdUsuario().equals(id)){
+                if (!usuarioExistente.getidUsuario().equals(id)){
                 throw new RecursoDuplicadoException("Usuário ", "nome ", dto.getNome());
                 }
         });
@@ -72,7 +76,7 @@ public class UsuarioService {
     }
     private UsuarioResponseDTO converterParaDTO (Usuario usuario){
         return UsuarioResponseDTO.builder()
-                .idUsuario(usuario.getIdUsuario())
+                .idUsuario(usuario.getidUsuario())
                 .build();
     }
 }
