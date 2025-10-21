@@ -54,7 +54,7 @@ public class UsuarioService {
         Usuario usuario = buscarUsuarioPorId(id);
 
         usuarioRepository.findByNome(dto.getNome()).ifPresent(usuarioExistente -> {
-                if (!usuarioExistente.getidUsuario().equals(id)){
+                if (!usuarioExistente.getIdUsuario().equals(id)){
                 throw new RecursoDuplicadoException("Usuário ", "nome ", dto.getNome());
                 }
         });
@@ -76,7 +76,7 @@ public class UsuarioService {
     }
     private UsuarioResponseDTO converterParaDTO (Usuario usuario){
         return UsuarioResponseDTO.builder()
-                .idUsuario(usuario.getidUsuario())
+                .idUsuario(usuario.getIdUsuario())
                 .build();
     }
 }

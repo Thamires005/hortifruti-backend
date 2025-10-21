@@ -20,6 +20,10 @@ import java.util.stream.Collectors;
 public class ProdutoService {
     private final ProdutoRepository produtoRepository;
 
+    public ProdutoService(ProdutoRepository produtoRepository) {
+        this.produtoRepository = produtoRepository;
+    }
+
     @Transactional(readOnly = true)
     public List<ProdutoResponseDTO> listarTodas() {
         return produtoRepository.findAll()

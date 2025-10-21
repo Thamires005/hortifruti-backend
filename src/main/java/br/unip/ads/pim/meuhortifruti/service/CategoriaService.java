@@ -19,6 +19,10 @@ public class CategoriaService {
 
     private final CategoriaRepository categoriaRepository;
 
+    public CategoriaService(CategoriaRepository categoriaRepository) {
+        this.categoriaRepository = categoriaRepository;
+    }
+
     @Transactional(readOnly = true)
     public List<CategoriaResponseDTO> listarTodas() {
         return categoriaRepository.findAll()

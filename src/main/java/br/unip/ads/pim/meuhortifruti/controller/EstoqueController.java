@@ -20,6 +20,10 @@ public class  EstoqueController {
 
     private final EstoqueService estoqueService;
 
+    public EstoqueController(EstoqueService estoqueService) {
+        this.estoqueService = estoqueService;
+    }
+
     @GetMapping
     public ResponseEntity<List<EstoqueResponseDTO>> listarTodas() {
         List<EstoqueResponseDTO> estoques = estoqueService.listarTodas();
