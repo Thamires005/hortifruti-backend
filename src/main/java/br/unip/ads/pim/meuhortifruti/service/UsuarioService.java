@@ -59,7 +59,7 @@ public class UsuarioService {
                 }
         });
 
-        usuario.setNome(dto.getNome());
+
         usuario = usuarioRepository.save(usuario);
         return converterParaDTO(usuario);
     }
