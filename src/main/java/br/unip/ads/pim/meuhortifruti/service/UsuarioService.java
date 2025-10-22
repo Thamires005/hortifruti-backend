@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static br.unip.ads.pim.meuhortifruti.entity.Usuario.*;
+
 @Service
 @RequiredArgsConstructor
 

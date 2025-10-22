@@ -41,7 +41,7 @@ public class ProdutoService {
         if(produtoRepository.existsByNome(dto.getNome())){
             throw new RecursoDuplicadoException("Produto ", "nome ", dto.getNome());
         }
-        Produto produto = produto.builder()
+        Produto produto = Produto.builder()
                 .nome(dto.getNome())
                 .build();
 
