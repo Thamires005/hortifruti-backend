@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class PagamentoService {
     private final PagamentoRepository pagamentoRepository;
 
+
     @Transactional(readOnly = true)
     public List<PagamentoResponseDTO> listarTodas(){
         return pagamentoRepository.findAll()

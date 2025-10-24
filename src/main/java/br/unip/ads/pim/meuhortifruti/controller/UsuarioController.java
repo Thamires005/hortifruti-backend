@@ -19,6 +19,7 @@ public class UsuarioController {
     
     private final UsuarioService usuarioService;
 
+
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDTO>> listarTodas() {
         List<UsuarioResponseDTO> usuarios = usuarioService.listarTodas();

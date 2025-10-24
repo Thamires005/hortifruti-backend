@@ -19,6 +19,7 @@ public class EstoqueService {
 
     private final EstoqueRepository estoqueRepository;
 
+
     @Transactional(readOnly = true)
     public List<EstoqueResponseDTO> listarTodas() {
         return estoqueRepository.findAll()

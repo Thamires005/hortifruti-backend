@@ -19,6 +19,7 @@ public class ForneceService {
 
     private final ForneceRepository forneceRepository;
 
+
     @Transactional(readOnly = true)
     public List<ForneceResponseDTO> listarTodas(){
         return ForneceRepository.findAll()

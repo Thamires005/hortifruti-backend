@@ -13,11 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static br.unip.ads.pim.meuhortifruti.entity.Usuario.*;
+
 @Service
 @RequiredArgsConstructor
 
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
+
 
     @Transactional(readOnly = true)
     public List<UsuarioResponseDTO> listarTodas(){
@@ -55,7 +58,7 @@ public class UsuarioService {
                 }
         });
 
-        usuario.setNome(dto.getNome());
+
         usuario = usuarioRepository.save(usuario);
         return converterParaDTO(usuario);
     }
