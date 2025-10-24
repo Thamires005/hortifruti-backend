@@ -21,9 +21,6 @@ import static br.unip.ads.pim.meuhortifruti.entity.Usuario.*;
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
 
     @Transactional(readOnly = true)
     public List<UsuarioResponseDTO> listarTodas(){

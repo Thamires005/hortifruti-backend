@@ -20,9 +20,6 @@ public class ForneceController {
 
     private final ForneceService forneceService;
 
-    public ForneceController(ForneceService forneceService) {
-        this.forneceService = forneceService;
-    }
 
     @GetMapping
     public ResponseEntity<List<ForneceResponseDTO>> listarTodas() {

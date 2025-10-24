@@ -19,9 +19,6 @@ import java.util.stream.Collectors;
 public class PagamentoService {
     private final PagamentoRepository pagamentoRepository;
 
-    public PagamentoService(PagamentoRepository pagamentoRepository) {
-        this.pagamentoRepository = pagamentoRepository;
-    }
 
     @Transactional(readOnly = true)
     public List<PagamentoResponseDTO> listarTodas(){

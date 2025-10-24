@@ -19,9 +19,6 @@ public class ForneceService {
 
     private final ForneceRepository forneceRepository;
 
-    public ForneceService(ForneceRepository forneceRepository) {
-        this.forneceRepository = forneceRepository;
-    }
 
     @Transactional(readOnly = true)
     public List<ForneceResponseDTO> listarTodas(){

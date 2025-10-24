@@ -19,9 +19,6 @@ public class EstoqueService {
 
     private final EstoqueRepository estoqueRepository;
 
-    public EstoqueService(EstoqueRepository estoqueRepository) {
-        this.estoqueRepository = estoqueRepository;
-    }
 
     @Transactional(readOnly = true)
     public List<EstoqueResponseDTO> listarTodas() {

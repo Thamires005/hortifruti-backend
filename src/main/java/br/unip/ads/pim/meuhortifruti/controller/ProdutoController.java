@@ -19,9 +19,6 @@ public class ProdutoController {
     
     private final ProdutoService produtoService;
 
-    public ProdutoController(ProdutoService produtoService) {
-        this.produtoService = produtoService;
-    }
 
     @GetMapping
     public ResponseEntity<List<ProdutoResponseDTO>> listarTodos() {

@@ -19,10 +19,6 @@ public class PagamentoController {
 
     private final PagamentoService pagamentoService;
 
-    public PagamentoController(PagamentoService pagamentoService) {
-        this.pagamentoService = pagamentoService;
-    }
-
     @GetMapping
     public ResponseEntity<List<PagamentoResponseDTO>> listarTodos() {
         List<PagamentoResponseDTO> pagamentos = pagamentoService.listarTodas();
