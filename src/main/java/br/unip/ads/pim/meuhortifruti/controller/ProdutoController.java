@@ -20,8 +20,8 @@ public class ProdutoController {
         private final ProdutoService produtoService;
 
         @GetMapping
-        public ResponseEntity<List<ProdutoResponseDTO>> listarTodos() {
-            List<ProdutoResponseDTO> produtos = produtoService.listarTodos();
+        public ResponseEntity<List<ProdutoResponseDTO>> listarTodas() {
+            List<ProdutoResponseDTO> produtos = produtoService.listarTodas();
             return ResponseEntity.ok(produtos);
         }
         @GetMapping("/{id}")
@@ -35,7 +35,7 @@ public class ProdutoController {
             ProdutoResponseDTO produto = produtoService.criar(dto);
             return ResponseEntity.status(HttpStatus.CREATED).body(produto);
         }
-        @PostMapping("/{id}")
+        @PutMapping("/{id}")
         @Secured("ROLE_ADMIN")
         public ResponseEntity<ProdutoResponseDTO> atualizar(
                 @PathVariable Integer id,
