@@ -56,6 +56,8 @@ public class ProdutoService {
             }
         });
         produto.setNome(dto.getNome());
+        produto.setPreco(dto.getPreco());
+        produto.setQuantidadeEstoque(dto.getQuantidadeEstoque());
         produto = produtoRepository.save(produto);
         return converterParaDTO(produto);
     }
