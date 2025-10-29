@@ -33,6 +33,8 @@ services:
       POSTGRES_USER: keycloak_user
       POSTGRES_PASSWORD: keycloak_pass
       POSTGRES_ENCODING: UTF8
+    ports:
+      - "5433:5432"
     volumes:
       - postgres_keycloak_data:/var/lib/postgresql/data
     networks:
@@ -48,23 +50,37 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:23.0
     container_name: hortifruti-keycloak
-    command: start-dev
+    command:
+      - start
+      - --optimized
+      - --http-enabled=true
+      - --hostname-strict=false
+      - --proxy=edge
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres-keycloak:5432/keycloak_db
       KC_DB_USERNAME: keycloak_user
       KC_DB_PASSWORD: keycloak_pass
+      KC_DB_SCHEMA: public
+      KC_TRANSACTION_XA_ENABLED: false
       KC_HOSTNAME: localhost
       KC_HOSTNAME_PORT: 8180
       KC_HOSTNAME_STRICT: false
       KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HTTP_ENABLED: true
+      KC_HTTP_PORT: 8080
+      KC_PROXY: edge
       KC_LOG_LEVEL: info
+      KC_LOG_CONSOLE_OUTPUT: default
       KC_METRICS_ENABLED: true
       KC_HEALTH_ENABLED: true
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
+      JAVA_OPTS_APPEND: "-Dkeycloak.profile.feature.upload_scripts=enabled"
     ports:
       - "8180:8080"
+    volumes:
+      - keycloak_data:/opt/keycloak/data
     depends_on:
       postgres-keycloak:
         condition: service_healthy
@@ -75,7 +91,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 60s
+      start_period: 90s
     restart: unless-stopped
 
   # Backend Spring Boot
@@ -84,6 +100,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: hortifruti-backend
+    env_file:
+      - .env
     environment:
       DB_HOST: postgres
       DB_PORT: 5432
@@ -96,6 +114,7 @@ services:
       KEYCLOAK_CLIENT_ID: hortifruti-backend
       KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET}
       SERVER_PORT: 8080
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8080:8080"
     depends_on:
@@ -117,6 +136,8 @@ services:
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     ports:
       - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
     depends_on:
       - postgres
     networks:
@@ -133,3 +154,7 @@ volumes:
     name: hortifruti-postgres-data
   postgres_keycloak_data:
     name: hortifruti-postgres-keycloak-data
+  keycloak_data:
+    name: hortifruti-keycloak-data
+  pgadmin_data:
+    name: hortifruti-pgadmin-data
