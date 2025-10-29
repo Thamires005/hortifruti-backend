@@ -36,17 +36,20 @@ public class ProdutoService {
         if (produtoRepository.existsByNome(dto.getNome())){
             throw new RecursoDuplicadoException("Produto", "nome", dto.getNome());
         }
+
         Produto produto = Produto.builder()
                 .nome(dto.getNome())
                 .preco(dto.getPreco())
                 .quantidadeEstoque(dto.getQuantidadeEstoque())
                 .build();
+
         produto = produtoRepository.save(produto);
         return converterParaDTO(produto);
     }
-   @Transactional
-   public ProdutoResponseDTO atualizar(Integer id, ProdutoRequestDTO dto){
+    @Transactional
+    public ProdutoResponseDTO atualizar(Integer id, ProdutoRequestDTO dto){
         Produto produto = buscarProdutoPorId(id);
+
         produtoRepository.findByNome(dto.getNome()).ifPresent(produtoExistente ->{
             if (!produtoExistente.getIdProduto().equals(id)){
                 throw new RecursoDuplicadoException("Produto", "nome", dto.getNome());
@@ -57,22 +60,24 @@ public class ProdutoService {
         produto.setQuantidadeEstoque(dto.getQuantidadeEstoque());
         produto = produtoRepository.save(produto);
         return converterParaDTO(produto);
-   }
-   @Transactional
-    public void excluir(Integer id){
+    }
+    @Transactional
+    public void excluir (Integer id){
         Produto produto = buscarProdutoPorId(id);
         produtoRepository.delete(produto);
-   }
-   private Produto buscarProdutoPorId(Integer id){
-       return produtoRepository.findById(id)
-               .orElseThrow(() -> new RecursoNaoEncontradoException("Produto", "id", id));
-   }
-   private ProdutoResponseDTO converterParaDTO(Produto produto){
+    }
+
+    private Produto buscarProdutoPorId(Integer id){
+        return produtoRepository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Produto", "id", id));
+    }
+
+    private ProdutoResponseDTO converterParaDTO(Produto produto){
         return ProdutoResponseDTO.builder()
                 .idProduto(produto.getIdProduto())
                 .nome(produto.getNome())
                 .quantidadeEstoque(produto.getQuantidadeEstoque())
                 .preco(produto.getPreco())
                 .build();
-   }
+    }
 }
