@@ -50,30 +50,20 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:23.0
     container_name: hortifruti-keycloak
-    command:
-      - start
-      - --optimized
-      - --http-enabled=true
-      - --hostname-strict=false
-      - --proxy=edge
+    command: start-dev
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres-keycloak:5432/keycloak_db
       KC_DB_USERNAME: keycloak_user
       KC_DB_PASSWORD: keycloak_pass
       KC_DB_SCHEMA: public
-      KC_TRANSACTION_XA_ENABLED: false
       KC_HOSTNAME: localhost
       KC_HOSTNAME_PORT: 8180
       KC_HOSTNAME_STRICT: false
       KC_HOSTNAME_STRICT_HTTPS: false
       KC_HTTP_ENABLED: true
-      KC_HTTP_PORT: 8080
       KC_PROXY: edge
       KC_LOG_LEVEL: info
-      KC_LOG_CONSOLE_OUTPUT: default
-      KC_METRICS_ENABLED: true
-      KC_HEALTH_ENABLED: true
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
       JAVA_OPTS_APPEND: "-Dkeycloak.profile.feature.upload_scripts=enabled"
