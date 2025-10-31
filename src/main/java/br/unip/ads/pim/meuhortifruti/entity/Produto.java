@@ -7,11 +7,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -30,6 +32,10 @@ public class Produto implements Serializable {
     @Column(name = "nome", nullable = false, length = 200)
     private String nome;
 
+    @NotNull
+    @Column(name= "data", nullable = false)
+    private LocalDate dataEntrega;
+
     @NotNull(message = "O preço do produto é obrigatório")
     @DecimalMin(value = "0.01", message = "O preço do produto deve ser maior que zero")
     @Column(name = "preço", nullable = false, precision = 10, scale = 2)
@@ -46,19 +52,19 @@ public class Produto implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria", nullable = false)
-    private Categoria categotia;
+    private Categoria categoria;
 
-    /*
+    @ManyToMany
+    Set<Fornecedor> fornecimentos;
+    private Fornecedor fornecedor;
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_estoque", nullable = false)
     private Estoque estoque;
 
-    @Builder.Default
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
-    private List<Fornecer>fornecimentos = new ArrayList<>();
-
+}
+    /*
     @Builder.Default
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<ItemCompra> itensCompra = new ArrayList<>();
      */
-}

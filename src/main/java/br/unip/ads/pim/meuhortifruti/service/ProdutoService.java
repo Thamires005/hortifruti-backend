@@ -41,6 +41,8 @@ public class ProdutoService {
                 .nome(dto.getNome())
                 .preco(dto.getPreco())
                 .quantidadeEstoque(dto.getQuantidadeEstoque())
+                .dtValidade(dto.getDtValidade())
+                .dataEntrega(dto.getDataEntrega())
                 .build();
 
         produto = produtoRepository.save(produto);
@@ -58,6 +60,8 @@ public class ProdutoService {
         produto.setNome(dto.getNome());
         produto.setPreco(dto.getPreco());
         produto.setQuantidadeEstoque(dto.getQuantidadeEstoque());
+        produto.setDataEntrega(dto.getDataEntrega());
+        produto.setDtValidade(dto.getDtValidade());
         produto = produtoRepository.save(produto);
         return converterParaDTO(produto);
     }
@@ -78,6 +82,9 @@ public class ProdutoService {
                 .nome(produto.getNome())
                 .quantidadeEstoque(produto.getQuantidadeEstoque())
                 .preco(produto.getPreco())
+                .dataEntrega(produto.getDataEntrega())
+                .fornecedor(produto.getFornecedor())
+                .dtValidade(produto.getDtValidade())
                 .build();
     }
 }
