@@ -33,7 +33,7 @@ public class Produto implements Serializable {
     private String nome;
 
     @NotNull
-    @Column(name= "data", nullable = false)
+    @Column(name = "data", nullable = false)
     private LocalDate dataEntrega;
 
     @NotNull(message = "O preço do produto é obrigatório")
@@ -55,16 +55,15 @@ public class Produto implements Serializable {
     private Categoria categoria;
 
     @ManyToMany
-    Set<Fornecedor> fornecimentos;
+    Set<Fornecedor> produtosfornecidos;
     private Fornecedor fornecedor;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_estoque", nullable = false)
     private Estoque estoque;
 
-}
-    /*
     @Builder.Default
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<ItemCompra> itensCompra = new ArrayList<>();
-     */
+
+}

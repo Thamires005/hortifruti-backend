@@ -9,8 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-import java.util.ArrayList;
+
 import java.util.Set;
 
 @Entity
@@ -20,7 +19,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Fornecedor {
-
 
     @ManyToMany
     Set<Produto> produtos;

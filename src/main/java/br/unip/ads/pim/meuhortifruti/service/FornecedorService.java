@@ -1,9 +1,7 @@
 package br.unip.ads.pim.meuhortifruti.service;
 
-import br.unip.ads.pim.meuhortifruti.dto.CategoriaResponseDTO;
 import br.unip.ads.pim.meuhortifruti.dto.FornecedorRequestDTO;
 import br.unip.ads.pim.meuhortifruti.dto.FornecedorResponseDTO;
-import br.unip.ads.pim.meuhortifruti.entity.Categoria;
 import br.unip.ads.pim.meuhortifruti.entity.Fornecedor;
 import br.unip.ads.pim.meuhortifruti.exception.RecursoDuplicadoException;
 import br.unip.ads.pim.meuhortifruti.exception.RecursoNaoEncontradoException;
@@ -85,6 +83,9 @@ public class FornecedorService {
                 .cnpj(fornecedor.getCnpj())
                 .telefone(fornecedor.getTelefone())
                 .idFornecedor(fornecedor.getIdFornecedor())
+                .email(fornecedor.getEmail())
+                .endereco(fornecedor.getEndereco())
+                .produtosFornecidos(fornecedor.getProdutosFornecidos())
                 .build();
     }
 }
