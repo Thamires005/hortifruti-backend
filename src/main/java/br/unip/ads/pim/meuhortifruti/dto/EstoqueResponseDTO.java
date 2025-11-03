@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EstoqueResponseDTO {
 
-    private Integer iEstoque;
-    private ProdutoResponseDTO produto;
+    private Integer idEstoque;
     private Integer quantidadeProdutos;
+    private ProdutoResponseDTO produto;
+    private Integer idProduto;
 }
