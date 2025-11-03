@@ -24,7 +24,7 @@ public class ProdutoRequestDTO {
     private BigDecimal preco;
 
     @NotNull(message = "A quantidade de produto é obrigatório")
-    @DecimalMin(value = "A quantidade não pode ser negativa")
+    @Min(value = 0, message = "A quantidade não pode ser negativa")
     private Integer quantidadeEstoque;
 
     @NotNull
