@@ -47,7 +47,7 @@ public class ItemCompra implements Serializable{
     private BigDecimal preco;
 
     @NotNull(message = "A quantidade do pedidos é obrigatória")
-    @Min(value = 0, message = "A quantidade não pode ser negativa")
+    @Min(value = 1, message = "A quantidade não pode ser negativa")
     @Column(name = "quantidade", nullable = false)
     private Integer quantidade;
 }

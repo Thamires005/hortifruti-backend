@@ -14,4 +14,5 @@ public class EstoqueResponseDTO {
     private Integer idEstoque;
     private ProdutoResponseDTO produto;
     private Integer quantidadeProdutos;
+    private Integer idProduto;
 }

@@ -66,13 +66,12 @@ public class CompraService {
     @Transactional
     public void excluir(Integer id){
         Compra compra = buscarCompraPorId(id);
-        compraRepository.findById(id)
-                .orElseThrow(() -> new RecursoNaoEncontradoException("Compra", "id", id));
+       compraRepository.delete(compra);
     }
 
     private Compra buscarCompraPorId(Integer id) {
         return compraRepository.findById(id)
-                .orElseThrow(() -> new RecursoNaoEncontradoException("Categoria", "id", id));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Compra", "id", id));
     }
 
     private CompraResponseDTO converterParaDTO(Compra compra) {

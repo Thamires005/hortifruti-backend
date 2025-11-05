@@ -24,7 +24,7 @@ public class PagamentoService {
 
     @Transactional
     public PagamentoResponseDTO criar(PagamentoRequestDTO dto){
-        if(pagamentoRepository.existsById(dto.getIdCompra())){
+        if(pagamentoRepository.existsByIdCompra(dto.getIdCompra())){
             throw new RecursoDuplicadoException("Pagamento", "id", dto.getIdCompra());
         }
         Pagamento pagamento = Pagamento.builder()
@@ -40,9 +40,9 @@ public class PagamentoService {
     public PagamentoResponseDTO atualizar(Integer id, PagamentoRequestDTO dto){
         Pagamento pagamento = buscarPagamentoPorId(id);
 
-        pagamentoRepository.findById(dto.getIdCompra()).ifPresent(pagamentoExistente -> {
+        pagamentoRepository.findByIdCompra(dto.getIdCompra()).ifPresent(pagamentoExistente -> { //busca pelo ID da compra
             if(!pagamentoExistente.getIdPagamento().equals(id)){
-                throw new RecursoDuplicadoException("Pagamento", "id", id);
+                throw new RecursoDuplicadoException("Pagamento", "idCompra", id);
             }
         });
         pagamento.setFormaPagamento(dto.getFormaPagamento());
