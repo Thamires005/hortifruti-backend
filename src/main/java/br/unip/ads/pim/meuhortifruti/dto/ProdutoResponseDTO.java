@@ -23,4 +23,5 @@ public class ProdutoResponseDTO {
     private LocalDate dtValidade;
     private String nome;
     private BigDecimal preco;
+
 }
