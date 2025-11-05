@@ -6,7 +6,6 @@ import br.unip.ads.pim.meuhortifruti.dto.EstoqueResponseDTO;
 import br.unip.ads.pim.meuhortifruti.exception.RecursoNaoEncontradoException;
 import br.unip.ads.pim.meuhortifruti.repository.EstoqueRepository;
 import br.unip.ads.pim.meuhortifruti.exception.RecursoDuplicadoException;
-import br.unip.ads.pim.meuhortifruti.dto.ProdutoResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +56,7 @@ public class EstoqueService {
     private EstoqueResponseDTO converterParaDTO (Estoque estoque){
         return EstoqueResponseDTO.builder()
                 .quantidadeProdutos(estoque.getQuantidadeProdutos())
+                .idEstoque(estoque.getIdEstoque())
                 .build();
     }
 

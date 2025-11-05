@@ -44,3 +44,4 @@ public class EstoqueController {
         return ResponseEntity.noContent().build();
     }
 }
+

@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EstoqueResponseDTO {
+public class PerfilResponseDTO {
 
-    private Integer idEstoque;
-    private ProdutoResponseDTO produto;
-    private Integer quantidadeProdutos;
-    private Integer idProduto;
+    private Integer idPerfil;
+    private String nome;
+    private String descricao;
 }

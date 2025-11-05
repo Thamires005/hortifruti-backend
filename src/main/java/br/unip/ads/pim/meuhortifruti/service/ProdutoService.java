@@ -83,7 +83,7 @@ public class ProdutoService {
                 .quantidadeEstoque(produto.getQuantidadeEstoque())
                 .preco(produto.getPreco())
                 .dataEntrega(produto.getDataEntrega())
-                //.fornecedor(produto.getFornecedor())
+                .fornecedor(produto.getFornecedor())
                 .dtValidade(produto.getDtValidade())
                 .build();
     }
